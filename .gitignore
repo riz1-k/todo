@@ -1,0 +1,5 @@
+server/node_modules
+middleware/node_modules
+client/node_modules
+client/build
+server/.env
