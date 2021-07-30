@@ -2,7 +2,6 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 const navigation = [{ name: 'My Todos', href: '#', current: true }];

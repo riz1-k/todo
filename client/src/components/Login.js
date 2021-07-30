@@ -1,7 +1,8 @@
 import React, { useRef, useContext, useState } from 'react';
 import { AuthContext } from '../globalState';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import { BACKEND_URL } from '../const';
 
 const Login = () => {
   const [user1, setUser1] = useState({ username: '', password: '' });
@@ -19,9 +20,10 @@ const Login = () => {
       userName: user1.username,
       password: user1.password,
     };
+    //you chance , ill come in 3 min
 
     axios
-      .post('http://localhost:3001/api/auth/login', body)
+      .post(`${BACKEND_URL}/api/auth/login`, body)
       .then(res => {
         localStorage.setItem('token', res.data.token);
         getUserData();
@@ -987,9 +989,6 @@ const Login = () => {
                     Remember Me
                   </label>
                 </div>
-                <a class='text-xss text-indigo-600' href='javascript: void(0)'>
-                  Forgot Password?
-                </a>
               </div>
               <div class='px-2 sm:px-6'>
                 <button
@@ -1000,12 +999,9 @@ const Login = () => {
                 </button>
                 <p class='mt-6 text-xs'>
                   Don’t Have An Account?{' '}
-                  <a
-                    class='underline text-indigo-600'
-                    href='javascript: void(0)'
-                  >
+                  <Link class='underline text-indigo-600' to='/signup'>
                     Sign Up
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

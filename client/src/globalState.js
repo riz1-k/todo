@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useState, useEffect } from 'react';
+import { BACKEND_URL } from './const';
 const AuthContext = createContext();
 
 const AuthProvider = props => {
@@ -18,7 +19,7 @@ const AuthProvider = props => {
         },
       };
       axios
-        .get('http://localhost:3001/api/todo', options)
+        .get(`${BACKEND_URL}/api/todo/`, options)
         .then(res => {
           setUser(res.data.user);
           setLoading(false);

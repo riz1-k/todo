@@ -1,7 +1,8 @@
 import React, { useRef, useContext, useState } from 'react';
 import { AuthContext } from '../globalState';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import { BACKEND_URL } from '../const';
 
 const SignUp = () => {
   const [user1, setUser1] = useState({ username: '', email: '', password: '' });
@@ -20,7 +21,7 @@ const SignUp = () => {
     };
 
     axios
-      .post('http://localhost:3001/api/auth/signup', body)
+      .post(`${BACKEND_URL}/api/auth/signup`, body)
       .then(res => {
         localStorage.setItem('token', res.data.token);
         getUserData();
@@ -1001,12 +1002,9 @@ const SignUp = () => {
                 </button>
                 <p class='mt-6 text-xs'>
                   Already have An Account?{' '}
-                  <a
-                    class='underline text-indigo-600'
-                    href='javascript: void(0)'
-                  >
+                  <Link class='underline text-indigo-600' to='/'>
                     Login
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

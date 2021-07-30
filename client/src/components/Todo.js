@@ -3,6 +3,7 @@ import '../style/Todo.css';
 import axios from 'axios';
 import { AuthContext } from '../globalState';
 import { Redirect } from 'react-router-dom';
+import { BACKEND_URL } from '../const';
 
 function Form() {
   const [todos, setTodos] = useState([]);
@@ -26,10 +27,6 @@ function Form() {
     return <Redirect to='/' />;
   }
 
-  const changeHandler = e => {
-    setTodo(e.target.value);
-  };
-
   const addTodo = e => {
     e.preventDefault();
     if (ref.current.value) {
@@ -42,7 +39,7 @@ function Form() {
       const body = {
         todo: todo,
       };
-      axios.post('http://localhost:3001/api/todo', body, option).then(res => {
+      axios.post(`${BACKEND_URL}/api/todo`, body, option).then(res => {
         setTodos(todos.concat(res.data.todo));
         setTodo('');
       });
@@ -61,10 +58,10 @@ function Form() {
       todo: todo,
     };
     axios
-      .put(`http://localhost:3001/api/todo/${edit.id}`, body, option)
+      .put(`${BACKEND_URL}/api/todo/${edit.id}`, body, option)
       .then(res => {
         let newTodos = [...todos];
-        newTodos.map(t => {
+        newTodos.forEach(t => {
           if (t._id === edit.id) {
             t.task = todo;
           }
@@ -86,7 +83,7 @@ function Form() {
     };
 
     axios
-      .delete(`http://localhost:3001/api/todo/${id}`, option)
+      .delete(`${BACKEND_URL}/api/todo/${id}`, option)
       .then(res => {
         let existingTasks = todos.filter(todo => todo._id !== id);
         setTodos(existingTasks);
