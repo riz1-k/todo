@@ -18,7 +18,7 @@ app.use('/api/todo', require('./server/routes/api/todoRoute'));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
-app.listen(3001, () =>
+app.listen(process.env.PORT || 3001, () =>
   console.log(
     '------------------------NODE server started on PORT 3001------------------------'
   )
